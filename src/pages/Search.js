@@ -39,7 +39,7 @@ const Search = () => {
             <Grid celled='internally' columns={3} stackable divided style={{ padding: '5em' }}>
            {currentProviders().map(provider => <Grid.Column key={provider.id}><Provider provider={provider} key={provider.id}/></Grid.Column>)}
            </Grid>
-           <Watson/>
+           {/* <Watson/> */}
         </div>
     )
 }
