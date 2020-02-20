@@ -64,13 +64,19 @@ const newUserToDB = userObj => {
 };
 
 const deleteUserFromDB = userId => dispatch => {
-  const config = {
-    method: 'DELETE'
-  };
-  fetch(SPECIFIC_USER_URL(userId), config).then(r => {
+  // const config = {
+  //   method: 'DELETE'
+  // };
+  // fetch(SPECIFIC_USER_URL(userId), config).then(r => {
+  //   dispatch(clearUserAction());
+  //   localStorage.clear();
+  // });
+  const axiosDelete = async() => {
+    await axios.delete(SPECIFIC_USER_URL(userId))
     dispatch(clearUserAction());
     localStorage.clear();
-  });
+  }
+  axiosDelete()
 };
 
 const loginUserToDB = userCredentials => {
@@ -86,17 +92,14 @@ const loginUserToDB = userCredentials => {
 };
 
 const persistUser = () => dispatch => {
-  const config = {
-    method: 'GET',
-    headers: {
-      Authorization: `bearer ` + localStorage.token
-    }
-  };
-  fetch(PERSIST_URL, config)
-    .then(r => r.json())
-    .then(userInstance => {
-      dispatch(setUserAction(userInstance));
-    });
+  const axiosPersist = async () => {
+    const options = {headers: {
+           Authorization: `bearer ` + localStorage.token
+         }}
+    const result = await axios(PERSIST_URL, options)
+    dispatch(setUserAction(result.data))
+  }
+  axiosPersist()
 };
 
 const logoutUser = () => dispatch => {

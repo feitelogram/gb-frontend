@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import userActions from '../redux/actions.js';
-import {Form, Header, Button} from "semantic-ui-react"
+import {Form, Header, Button, Container} from "semantic-ui-react"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -45,6 +45,7 @@ const Signup = props => {
       onSubmit={handleSubmit}>
       <Header as= "h1" textAlign= "center" content="Welcome to getBetter."/>
       <Header as="h3" textAlign="center" content="Please choose a username and a secure password."/>
+      <Container style={{width: "20rem"}}>
       <Form.Field>
       <input
         type="text"
@@ -64,6 +65,7 @@ const Signup = props => {
       />
       </Form.Field>
       <Button type="submit">Signup</Button>
+      </Container>
     </Form>
   );
 };
